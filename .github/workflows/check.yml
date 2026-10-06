@@ -1,0 +1,36 @@
+name: Check profile
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+
+      - name: Tests
+        run: node --test scripts/test.mjs
+
+      - name: Static SVGs match profile.config.json
+        run: |
+          node scripts/build-static.mjs
+          node scripts/build-contributions.mjs --offline
+          git diff --exit-code -- assets/ || {
+            echo "::error::assets/ is out of date. Run 'npm run build:offline' and commit the result."
+            exit 1
+          }
+
+      - name: Validate SVGs and README links
+        run: node scripts/validate.mjs --links

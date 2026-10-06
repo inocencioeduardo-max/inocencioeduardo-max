@@ -1,0 +1,19 @@
+{
+  "name": "inocencioeduardo-max",
+  "private": true,
+  "description": "Animated GitHub profile README for inocencioeduardo-max",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "node scripts/build-static.mjs && node scripts/build-contributions.mjs",
+    "build:static": "node scripts/build-static.mjs",
+    "build:contributions": "node scripts/build-contributions.mjs",
+    "build:offline": "node scripts/build-static.mjs && node scripts/build-contributions.mjs --offline",
+    "test": "node --test scripts/test.mjs",
+    "validate": "node scripts/validate.mjs",
+    "validate:links": "node scripts/validate.mjs --links",
+    "preview": "node scripts/preview.mjs"
+  }
+}

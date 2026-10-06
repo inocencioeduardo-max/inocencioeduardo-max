@@ -1,0 +1,48 @@
+name: Refresh contribution graph
+
+# Runs daily and on demand only. There is deliberately no `push` trigger, and
+# commits made with GITHUB_TOKEN never start new workflow runs, so the refresh
+# commit cannot loop.
+on:
+  schedule:
+    - cron: "17 4 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: refresh-contributions
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+
+      - name: Build contribution graph
+        # Keeps the last valid graph (and exits 0) if GitHub can't be fetched or parsed.
+        run: node scripts/build-contributions.mjs
+
+      - name: Validate assets
+        run: node scripts/validate.mjs
+
+      - name: Commit graph if it changed
+        run: |
+          git add -- assets/contributions.svg data/contributions.json
+          if git diff --cached --quiet; then
+            echo "No changes."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore: refresh contribution graph"
+          git push

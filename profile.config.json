@@ -1,0 +1,34 @@
+{
+  "username": "inocencioeduardo-max",
+  "header": {
+    "prompt": "ino@builds:~$",
+    "command": "whoami",
+    "title": "Ino Builds AI.",
+    "subtitle": "AI Automation Engineer · Telecom Platform Lead · Systems Builder",
+    "footer": "Netherlands · Dominican roots"
+  },
+  "card": {
+    "title": "system.info",
+    "rows": [
+      { "key": "name", "value": "Inocencio Eduardo (Ino)" },
+      { "key": "focus", "value": "AI tools, automation systems, device workflows" },
+      { "key": "background", "value": "Telecom & cloud platforms" },
+      { "key": "domains", "value": "Wi-Fi · DOCSIS · IPv6 · interoperability" },
+      { "key": "building", "value": "AI-EOS / ChatMap · DiamondScout" },
+      { "key": "testing", "value": "Telecom test automation" },
+      { "key": "base", "value": "Netherlands · Dominican roots" }
+    ]
+  },
+  "blueprint": {
+    "title": "how the pieces connect",
+    "nodes": [
+      { "label": "AI agents", "sub": "orchestration" },
+      { "label": "Automation", "sub": "workers · relays" },
+      { "label": "Platforms", "sub": "cloud · gateways" },
+      { "label": "Devices", "sub": "Wi-Fi · DOCSIS" }
+    ]
+  },
+  "contributions": {
+    "title": "public contributions"
+  }
+}
