@@ -5,25 +5,23 @@ import { fileURLToPath } from 'node:url';
 
 export const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
 
-// Palette: dark surface, restrained cyan/green accents.
+// Palette: GitHub-dark terminal surface with green accents.
 export const theme = {
-  bg: '#0b1117',
-  panel: '#0f1720',
-  border: '#1f2b37',
-  grid: '#13202b',
+  bg: '#0d1117',
+  border: '#30363d',
+  bar: '#161b22',
   text: '#e6edf3',
-  muted: '#8b98a5',
-  dim: '#5b6875',
-  cyan: '#5ccfe6',
-  green: '#7ee2a8',
-  // Heatmap ramp, level 0..4
-  levels: ['#151d26', '#0f3d3a', '#13695a', '#22a27a', '#5fe0a3'],
+  muted: '#8b949e',
+  dim: '#484f58',
+  green: '#3fb950',
+  bright: '#56d364',
+  ascii: '#c9d1d9',
+  // Heatmap ramp, level 0..4 (GitHub's dark-mode greens)
+  levels: ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353'],
 };
 
 export const MONO =
   "ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace";
-export const SANS =
-  "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif";
 
 export function esc(value) {
   return String(value)
@@ -65,3 +63,15 @@ export function writeIfChanged(relPath, content) {
   writeFileSync(file, content);
   return true;
 }
+
+// Terminal window frame: border, title bar and three muted dots.
+export function windowChrome(width, height, label) {
+  return `<rect x="0.5" y="0.5" width="${width - 1}" height="${height - 1}" rx="8" fill="${theme.bg}" stroke="${theme.border}"/>
+<path d="M1 28.5 H${width - 1}" stroke="${theme.border}"/>
+<circle cx="16" cy="14.5" r="4.5" fill="${theme.dim}"/>
+<circle cx="31" cy="14.5" r="4.5" fill="${theme.dim}"/>
+<circle cx="46" cy="14.5" r="4.5" fill="${theme.dim}"/>
+<text x="${width / 2}" y="18.5" text-anchor="middle" font-size="11" fill="${theme.muted}">${esc(label)}</text>`;
+}
+
+export const CHAR = 0.6; // approximate monospace advance, in em

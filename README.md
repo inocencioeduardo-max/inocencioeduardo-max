@@ -1,4 +1,17 @@
-<img src="assets/header.svg" width="100%" alt="Terminal window: the command whoami prints “Ino Builds AI.” — AI Automation Engineer, Telecom Platform Lead, Systems Builder. Netherlands, Dominican roots.">
+<div align="center">
+
+<h3><code>ino@builds-ai ~ $ whoami</code></h3>
+
+<img src="assets/contributions.svg" width="822" alt="Heatmap of public GitHub contributions for inocencioeduardo-max over the last year, generated from GitHub's public contribution calendar and refreshed daily.">
+
+<table>
+  <tr>
+    <td valign="top"><img src="assets/portrait.svg" width="330" alt="Monochrome ASCII-art portrait of Ino, head and shoulders, wearing glasses."></td>
+    <td valign="top"><img src="assets/card.svg" width="437" alt="Terminal info card titled Ino Builds AI. Role: AI Automation Engineer, Telecom Platform Lead, Systems Builder. Focus: AI tools, automation systems and workflows that connect software with real devices. Domains: telecom and cloud platforms, Wi-Fi, DOCSIS, IPv6, device interoperability. Building: AI-EOS / ChatMap and DiamondScout, both in development. Testing: telecom test automation, ongoing. Base: Netherlands, Dominican roots."></td>
+  </tr>
+</table>
+
+</div>
 
 ## Hi, I'm Ino 👋
 
@@ -23,18 +36,6 @@ Tooling for crypto research and trading workflows.
 ### Telecom test automation · `ongoing`
 
 Interoperability testing across gateways, pods and cloud platforms.
-
-## At a glance
-
-<img src="assets/card.svg" width="100%" alt="Information card. Name: Inocencio Eduardo (Ino). Focus: AI tools, automation systems, device workflows. Background: telecom and cloud platforms. Domains: Wi-Fi, DOCSIS, IPv6, interoperability. Building: AI-EOS / ChatMap and DiamondScout. Testing: telecom test automation. Blueprint: AI agents → automation → platforms → devices.">
-
-- **Focus:** AI tools, automation systems, workflows between software and devices
-- **Background:** telecom and cloud platforms
-- **Domains:** Wi-Fi · DOCSIS · IPv6 · device interoperability · test automation
-
-## Activity
-
-<img src="assets/contributions.svg" width="100%" alt="Heatmap of public GitHub contributions over the last year, generated from GitHub's public contribution calendar and refreshed daily.">
 
 ## Find me
 

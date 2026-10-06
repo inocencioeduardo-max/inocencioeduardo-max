@@ -36,7 +36,7 @@ function toHtml(src) {
     } else if (line.startsWith('> ')) {
       flush();
       out.push(`<blockquote><p>${inline(line.slice(2))}</p></blockquote>`);
-    } else if (line.startsWith('<')) {
+    } else if (line.trimStart().startsWith('<')) {
       flush();
       out.push(inline(line));
     } else if (!line.trim()) flush();
@@ -58,7 +58,12 @@ ul { padding-left: 2em; }
 a { color: #4493f8; text-decoration: none; }
 code { background: #656c7633; padding: .2em .4em; border-radius: 6px; font-size: 85%; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
 blockquote { color: #9198a1; border-left: .25em solid #3d444d; padding: 0 1em; }
-img { max-width: 100%; height: auto; }
+img { max-width: 100%; height: auto; vertical-align: middle; }
+h3 code { font-size: 85%; }
+/* GitHub's markdown table styling */
+table { display: block; width: max-content; max-width: 100%; overflow: auto; border-spacing: 0; border-collapse: collapse; margin: 0 auto 16px; }
+td { padding: 6px 13px; border: 1px solid #3d444d; }
+tr { background: #0d1117; border-top: 1px solid #3d444db3; }
 </style></head><body><article>
 ${toHtml(md)}
 </article></body></html>`;

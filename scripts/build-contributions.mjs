@@ -10,7 +10,8 @@
 import { readFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { theme as t, MONO, esc, svgDoc, readJson, writeIfChanged, ROOT } from './lib/svg.mjs';
+import { theme as t, MONO, esc, svgDoc, readJson, writeIfChanged, windowChrome, ROOT } from './lib/svg.mjs';
+import { HEATMAP_W, PAD } from './lib/layout.mjs';
 
 const SNAPSHOT = 'data/contributions.json';
 const OUTPUT = 'assets/contributions.svg';
@@ -98,19 +99,40 @@ function dayDiff(a, b) {
   return (Date.parse(`${b}T00:00:00Z`) - Date.parse(`${a}T00:00:00Z`)) / 86400000;
 }
 
+// Streaks and totals derived only from the parsed day data.
+export function stats(days) {
+  let longest = 0;
+  let run = 0;
+  let best = null;
+  for (const d of days) {
+    run = d.count > 0 ? run + 1 : 0;
+    longest = Math.max(longest, run);
+    if (d.count > 0 && (!best || d.count > best.count)) best = d;
+  }
+  // Current streak may end yesterday: today isn't over yet.
+  let i = days.length - 1;
+  if (i >= 0 && days[i].count === 0) i--;
+  let current = 0;
+  while (i >= 0 && days[i].count > 0) {
+    current++;
+    i--;
+  }
+  return { active: days.filter((d) => d.count > 0).length, longest, current, best };
+}
+
 export function render({ username, title, total, days }) {
-  const cell = 11;
-  const step = 14;
-  const left = 64;
-  const top = 92;
+  const W = HEATMAP_W;
+  const cell = 12;
+  const left = 46;
+  const top = 78;
   const first = new Date(`${days[0].date}T00:00:00Z`);
   const offset = first.getUTCDay(); // Sunday-first rows, matching GitHub
   const weeks = Math.ceil((days.length + offset) / 7);
-  const W = Math.max(left + weeks * step + 30, 860);
-  const H = top + 7 * step + 50;
+  const step = Math.min(15, Math.floor((W - left - PAD) / weeks));
+  const H = top + 7 * step + 46;
   const fromDate = days[0].date;
   const toDate = days[days.length - 1].date;
-  const active = days.filter((d) => d.count > 0).length;
+  const s = stats(days);
 
   const cells = [];
   const monthLabels = [];
@@ -123,11 +145,11 @@ export function render({ username, title, total, days }) {
     const y = top + r * step;
     const label = `${d.count === 0 ? 'No' : d.count} contribution${d.count === 1 ? '' : 's'} on ${d.date}`;
     cells.push(
-      `<rect x="${x}" y="${y}" width="${cell}" height="${cell}" rx="2" class="c w${w % 53}" fill="${t.levels[d.level]}"><title>${label}</title></rect>`,
+      `<rect x="${x}" y="${y}" width="${cell}" height="${cell}" rx="2.5" class="c d${w + r}" fill="${t.levels[d.level]}"><title>${label}</title></rect>`,
     );
     const month = new Date(`${d.date}T00:00:00Z`).getUTCMonth();
     if (month !== lastMonth && r <= 3 && w < weeks - 1) {
-      monthLabels.push(`<text x="${x}" y="${top - 10}" class="lbl">${MONTHS[month]}</text>`);
+      monthLabels.push(`<text x="${x}" y="${top - 8}" class="lbl">${MONTHS[month]}</text>`);
       lastMonth = month;
     }
   });
@@ -137,47 +159,56 @@ export function render({ username, title, total, days }) {
     [3, 'Wed'],
     [5, 'Fri'],
   ]
-    .map(([r, s]) => `<text x="${left - 12}" y="${top + r * step + 9}" text-anchor="end" class="lbl">${s}</text>`)
+    .map(([r, l]) => `<text x="${left - 8}" y="${top + r * step + 10}" text-anchor="end" class="lbl">${l}</text>`)
     .join('');
 
-  const legendX = W - 30 - 5 * step - 72;
+  const footY = H - 18;
+  const legendX = W - PAD - 5 * step - 70;
   const legend = t.levels
-    .map((c, i) => `<rect x="${legendX + 36 + i * step}" y="${H - 31}" width="${cell}" height="${cell}" rx="2" fill="${c}"/>`)
+    .map((c, i) => `<rect x="${legendX + 34 + i * step}" y="${footY - 10}" width="${cell}" height="${cell}" rx="2.5" fill="${c}"/>`)
     .join('');
 
+  const plural = (n, word) => `${n.toLocaleString('en-US')} ${word}${n === 1 ? '' : 's'}`;
   const summary =
     total === 0
       ? 'No public contributions in this period yet — refreshed daily.'
-      : `${total.toLocaleString('en-US')} contribution${total === 1 ? '' : 's'} on ${active} day${active === 1 ? '' : 's'} in the last year`;
+      : `${plural(total, 'contribution')} in the last year`;
+  const footer =
+    total === 0
+      ? `${fromDate} → ${toDate} · public GitHub data`
+      : [
+          `current streak ${plural(s.current, 'day')}`,
+          `longest ${plural(s.longest, 'day')}`,
+          `best day ${s.best.count} (${s.best.date})`,
+          `${plural(s.active, 'active day')}`,
+        ].join(' · ');
 
-  const delays = Array.from({ length: 53 }, (_, w) => `.w${w}{animation-delay:${(0.2 + w * 0.02).toFixed(2)}s}`).join('');
+  const diagonals = weeks + 7;
+  const delays = Array.from({ length: diagonals }, (_, k) => `.d${k}{animation-delay:${(0.15 + k * 0.018).toFixed(3)}s}`).join('');
 
   const style = `
 text { font-family: ${MONO}; }
-.chrome { fill: ${t.muted}; font-size: 12px; }
 .lbl { fill: ${t.muted}; font-size: 10px; }
-.head { fill: ${t.text}; font-size: 14px; }
-.prompt { fill: ${t.green}; font-size: 14px; }
-.sum { fill: ${t.cyan}; font-size: 12px; }
-.c { stroke: ${t.bg}; stroke-opacity: 0.4; animation: pop 0.4s ease-out both; }
+.sum { fill: ${t.green}; font-size: 12.5px; }
+.foot { fill: ${t.muted}; font-size: 10.5px; }
+.c { animation: drop 0.35s ease-out both; }
 ${delays}
-@keyframes pop { from { opacity: 0; } to { opacity: 1; } }`;
+@keyframes drop { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }`;
 
   const body = `
-<rect x="0.5" y="0.5" width="${W - 1}" height="${H - 1}" rx="12" fill="${t.bg}" stroke="${t.border}"/>
-<text x="24" y="32" class="prompt">#</text><text x="40" y="32" class="head">${esc(title)} · @${esc(username)}</text>
-<text x="24" y="54" class="sum">${esc(summary)}</text>
+${windowChrome(W, H, `${title} · @${username}`)}
+<text x="${PAD + 6}" y="52" class="sum">${esc(summary)}</text>
 ${monthLabels.join('')}
 ${dayLabels}
 ${cells.join('\n')}
-<text x="24" y="${H - 22}" class="lbl">${fromDate} → ${toDate} · public GitHub data</text>
-<text x="${legendX}" y="${H - 22}" class="lbl">Less</text>${legend}<text x="${legendX + 36 + 5 * step + 4}" y="${H - 22}" class="lbl">More</text>`;
+<text x="${PAD + 6}" y="${footY}" class="foot">${esc(footer)}</text>
+<text x="${legendX}" y="${footY}" class="lbl">Less</text>${legend}<text x="${legendX + 34 + 5 * step + 4}" y="${footY}" class="lbl">More</text>`;
 
   return svgDoc({
     width: W,
     height: H,
     title: `${title}: ${username}`,
-    desc: `Contribution heatmap for ${username} from public GitHub data, ${fromDate} to ${toDate}. ${summary}`,
+    desc: `Contribution heatmap for ${username} from public GitHub data, ${fromDate} to ${toDate}. ${summary}${total ? `. ${footer}` : ''}`,
     style,
     body,
   });

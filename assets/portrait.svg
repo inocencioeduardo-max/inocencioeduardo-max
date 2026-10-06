@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="370" height="420" viewBox="0 0 370 420" role="img" aria-labelledby="title desc">
+<title id="title">ASCII portrait of Inocencio Eduardo</title>
+<desc id="desc">Monochrome ASCII-art portrait of Ino, head and shoulders, wearing glasses, typed out line by line in a terminal window.</desc>
+<style>
+text { font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace; }
+.a { fill: #c9d1d9; font-size: 6.79px; white-space: pre; animation: wipe 0.3s linear both; }
+@keyframes wipe { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+</style>
+<rect x="0.5" y="0.5" width="369" height="419" rx="8" fill="#0d1117" stroke="#30363d"/>
+<path d="M1 28.5 H369" stroke="#30363d"/>
+<circle cx="16" cy="14.5" r="4.5" fill="#484f58"/>
+<circle cx="31" cy="14.5" r="4.5" fill="#484f58"/>
+<circle cx="46" cy="14.5" r="4.5" fill="#484f58"/>
+<text x="185" y="18.5" text-anchor="middle" font-size="11" fill="#8b949e">ino.ascii</text>
+<text x="14" y="74.3" class="a" textLength="191.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve" style="animation-delay:0.270s">                              ..``....```::::`.</text>
+<text x="14" y="81.9" class="a" textLength="211.7" lengthAdjust="spacingAndGlyphs" xml:space="preserve" style="animation-delay:0.305s">                          .```                  .``.</text>
+<text x="14" y="89.5" class="a" textLength="215.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" style="animation-delay:0.340s">                         `.                        .`</text>
+<text x="14" y="97.1" class="a" textLength="228.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve" style="animation-delay:0.375s">                       `       `=*c*++===-:.         ``.</text>
+<text x="14" y="104.7" class="a" textLength="232.1" lengthAdjust="spacingAndGlyphs" xml:space="preserve" style="animation-delay:0.410s">                     ..    `*s#%%%%%@@@@@@@%%c*-`      `.</text>
+<text x="14" y="112.3" class="a" textLength="236.1" lengthAdjust="spacingAndGlyphs" xml:space="preserve" style="animation-delay:0.445s">                     .    =c#s####%%@@@@@%%%%##ss*=`    ``</text>
+<text x="14" y="119.9" class="a" textLength="240.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" style="animation-delay:0.480s">                     .   :sscss###%%%@@%%%%%%%#ssccc=`    .</text>
+<text x="14" y="127.5" class="a" textLength="240.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" style="animation-delay:0.515s">                     `..`*s*cs######%%%%%%%%%##sscc*++=   .</text>
+<text x="14" y="135.1" class="a" textLength="244.3" lengthAdjust="spacingAndGlyphs" xml:space="preserve" style="animation-delay:0.550s">                    .+`=+c**s################sssccc*+-+*   `</text>
+<text x="14" y="142.7" class="a" textLength="244.3" lengthAdjust="spacingAndGlyphs" xml:space="preserve" style="animation-delay:0.585s">                    +s**+**cs##%#%%%######sssccc**++==-+`  `</text>
+<text x="14" y="150.3" class="a" textLength="232.1" lengthAdjust="spacingAndGlyphs" xml:space="preserve" style="animation-delay:0.620s">                    c#ccc*css#%%%%%%%%####ssscc**++=-==-`</text>
+<text x="14" y="157.9" class="a" textLength="240.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" style="animation-delay:0.655s">                    @@scc#%%%%%@%%%%%%%%%%####ssc+++++=-` .</text>
+<text x="14" y="165.5" class="a" textLength="236.1" lengthAdjust="spacingAndGlyphs" xml:space="preserve" style="animation-delay:0.690s">                .=  @@#@*+===*+=+***cs#%####%##sc**++==+`.</text>
+<text x="14" y="173.1" class="a" textLength="236.1" lengthAdjust="spacingAndGlyphs" xml:space="preserve" style="animation-delay:0.725s">               `-`%%%*=-`::-==-:.`-=.=cs#sssss##sccc=-=*+`</text>
+<text x="14" y="180.7" class="a" textLength="232.1" lengthAdjust="spacingAndGlyphs" xml:space="preserve" style="animation-delay:0.760s">               -:`+%**c*-. . ..---===`==+=--....`-=++=c%s</text>
+<text x="14" y="188.3" class="a" textLength="232.1" lengthAdjust="spacingAndGlyphs" xml:space="preserve" style="animation-delay:0.795s">               +c-#sss#@%*=++=:+..=:*c#sc:.:*c*****=:=%@.</text>
+<text x="14" y="195.9" class="a" textLength="228.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve" style="animation-delay:0.830s">               +#=scs##%@@#cc*+=:-+c#c#c==*:`.`++*+==s@%</text>
+<text x="14" y="203.5" class="a" textLength="232.1" lengthAdjust="spacingAndGlyphs" xml:space="preserve" style="animation-delay:0.865s">               +@#ccsss#%@@@%%%###cc*%%ccc=-:` .:..-=+@:`</text>
+<text x="14" y="211.1" class="a" textLength="232.1" lengthAdjust="spacingAndGlyphs" xml:space="preserve" style="animation-delay:0.900s">               -#*++***cs%@@@@@@%s*#@@%s*sss+==++-:-=*%+c</text>
+<text x="14" y="218.7" class="a" textLength="232.1" lengthAdjust="spacingAndGlyphs" xml:space="preserve" style="animation-delay:0.935s">                -c==+++**csss##=-#%@@@%%c*s##sssccccc*#..</text>
+<text x="14" y="226.3" class="a" textLength="228.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve" style="animation-delay:0.970s">                 c--==+*cssssc+s@@%@@@@%s=cs#ssssss*c#+.</text>
+<text x="14" y="233.9" class="a" textLength="219.9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" style="animation-delay:1.005s">                 c--===++*csssc=:.`+s#ss#%**ssscc*cc+%</text>
+<text x="14" y="241.5" class="a" textLength="219.9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" style="animation-delay:1.040s">                 c::--==++*c#%%-`:. .... `+*c**cc*+-+:</text>
+<text x="14" y="249.1" class="a" textLength="215.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve" style="animation-delay:1.075s">                 =------=+cs##%s+**-:-+=-+cccc**+=-=-</text>
+<text x="14" y="256.7" class="a" textLength="211.7" lengthAdjust="spacingAndGlyphs" xml:space="preserve" style="animation-delay:1.110s">                 `=----=+++++***s%%*=-:-***+**++=--=</text>
+<text x="14" y="264.3" class="a" textLength="207.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve" style="animation-delay:1.145s">                  ::---==-:``... .:+c*+=.:++====:-.</text>
+<text x="14" y="271.9" class="a" textLength="203.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve" style="animation-delay:1.180s">                  .`:-=---===++*sc=-:`  -.-=-=:::`</text>
+<text x="14" y="279.5" class="a" textLength="199.5" lengthAdjust="spacingAndGlyphs" xml:space="preserve" style="animation-delay:1.215s">                  :`.`-::::::``:-*cs%%c+::--=:`:-</text>
+<text x="14" y="287.1" class="a" textLength="207.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve" style="animation-delay:1.250s">                  ::...`-------:.   ..`:--:-:`:=.@:</text>
+<text x="14" y="294.7" class="a" textLength="228.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve" style="animation-delay:1.285s">                  ::`.  .:+***ccscc*+=--:```:: : `ss*+-.</text>
+<text x="14" y="302.3" class="a" textLength="248.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve" style="animation-delay:1.320s">                  `:::`.  .:-=++*ccc*+=-:```          .:+**-.</text>
+<text x="14" y="309.9" class="a" textLength="264.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve" style="animation-delay:1.355s">                  .`:::`.    ..````:::`.                   `+sc=`</text>
+<text x="14" y="317.5" class="a" textLength="285.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve" style="animation-delay:1.390s">                   ``:::`..                                   .=+cs*=.</text>
+<text x="14" y="325.1" class="a" textLength="305.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve" style="animation-delay:1.425s">                   ``::::`......                                  `--+**+=:</text>
+<text x="14" y="332.7" class="a" textLength="325.7" lengthAdjust="spacingAndGlyphs" xml:space="preserve" style="animation-delay:1.460s">                   .```::::`````..                                     ...:----`</text>
+<text x="14" y="340.3" class="a" textLength="333.9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" style="animation-delay:1.495s">                    ..`::::::``..                                              .:.</text>
+<text x="14" y="347.9" class="a" textLength="337.9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" style="animation-delay:1.530s">                     ```::::`..                                                   `</text>
+<text x="14" y="355.5" class="a" textLength="337.9" lengthAdjust="spacingAndGlyphs" xml:space="preserve" style="animation-delay:1.565s">                      `:---:`.. ...                                               .</text>
+<text x="14" y="363.1" class="a" textLength="138.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve" style="animation-delay:1.600s">                       .-*+--``::.</text>
+<text x="14" y="370.7" class="a" textLength="134.4" lengthAdjust="spacingAndGlyphs" xml:space="preserve" style="animation-delay:1.635s">                         .=++==-.</text>
+<text x="14" y="378.3" class="a" textLength="342.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve" style="animation-delay:1.670s">                            :*+*.                                                  `</text>
+<text x="14" y="385.9" class="a" textLength="126.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" style="animation-delay:1.705s">                .            =+</text>
+<text x="14" y="393.5" class="a" textLength="69.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" style="animation-delay:1.740s">                .</text>
+</svg>

@@ -14,6 +14,7 @@
     "test": "node --test scripts/test.mjs",
     "validate": "node scripts/validate.mjs",
     "validate:links": "node scripts/validate.mjs --links",
-    "preview": "node scripts/preview.mjs"
+    "preview": "node scripts/preview.mjs",
+    "build:portrait": "node scripts/build-portrait.mjs"
   }
 }
