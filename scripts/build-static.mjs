@@ -15,10 +15,45 @@ function buildPortrait() {
   const charW = grid.width / grid.columns;
   const top = TITLE_BAR + PAD + (grid.height - lines.length * grid.lineHeight) / 2;
 
+  // Scan beam: one pass synced with the typing reveal, then a slow repeating sweep.
+  // Beams are hidden by default, so the static/reduced-motion frame stays clean.
+  const scanTop = TITLE_BAR + 1;
+  const scanH = ROW_H - TITLE_BAR - 2;
+  const beamH = 36;
+  const revealDur = (lines.length * 0.035 + 0.3).toFixed(2);
+
   const style = `
 text { font-family: ${MONO}; }
 .a { fill: ${t.ascii}; font-size: ${grid.fontSize.toFixed(2)}px; white-space: pre; animation: wipe 0.3s linear both; }
-@keyframes wipe { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }`;
+.beam { opacity: 0; }
+.b1 { animation: scan ${revealDur}s linear 0.2s 1 both; }
+.b2 { animation: sweep 6s ease-in-out ${(0.2 + Number(revealDur) + 1.5).toFixed(2)}s infinite both; }
+@keyframes wipe { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+@keyframes scan {
+  0% { opacity: 1; transform: translateY(0); }
+  92% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(${scanH}px); }
+}
+@keyframes sweep {
+  0% { opacity: 0; transform: translateY(0); }
+  8% { opacity: 0.75; }
+  42% { opacity: 0.75; }
+  50% { opacity: 0; transform: translateY(${scanH}px); }
+  100% { opacity: 0; transform: translateY(${scanH}px); }
+}`;
+
+  // The clip sits on a stationary outer group; clipping the moving group would move the clip too.
+  const beam = (cls) => `<g clip-path="url(#screen)"><g class="beam ${cls}">
+<rect x="1" y="${scanTop - beamH}" width="${PORTRAIT_W - 2}" height="${beamH}" fill="url(#glow)"/>
+<rect x="1" y="${scanTop - 1}" width="${PORTRAIT_W - 2}" height="1.2" fill="${t.bright}" opacity="0.9"/>
+</g></g>`;
+  const defs = `<defs>
+<linearGradient id="glow" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0" stop-color="${t.green}" stop-opacity="0"/>
+<stop offset="1" stop-color="${t.green}" stop-opacity="0.28"/>
+</linearGradient>
+<clipPath id="screen"><rect x="1" y="${scanTop}" width="${PORTRAIT_W - 2}" height="${scanH}"/></clipPath>
+</defs>`;
 
   const rows = lines
     .map((line, i) => {
@@ -34,9 +69,9 @@ text { font-family: ${MONO}; }
     width: PORTRAIT_W,
     height: ROW_H,
     title: 'ASCII portrait of Inocencio Eduardo',
-    desc: 'Monochrome ASCII-art portrait of Ino, head and shoulders, wearing glasses, typed out line by line in a terminal window.',
+    desc: 'Monochrome ASCII-art portrait of Ino, head and shoulders, wearing glasses, typed out line by line in a terminal window while a green scan line sweeps over it.',
     style,
-    body: `${windowChrome(PORTRAIT_W, ROW_H, 'ino.ascii')}\n${rows}`,
+    body: `${defs}\n${windowChrome(PORTRAIT_W, ROW_H, 'ino.ascii')}\n${rows}\n${beam('b1')}\n${beam('b2')}`,
   });
 }
 

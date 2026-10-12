@@ -1,12 +1,34 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="370" height="420" viewBox="0 0 370 420" role="img" aria-labelledby="title desc">
 <title id="title">ASCII portrait of Inocencio Eduardo</title>
-<desc id="desc">Monochrome ASCII-art portrait of Ino, head and shoulders, wearing glasses, typed out line by line in a terminal window.</desc>
+<desc id="desc">Monochrome ASCII-art portrait of Ino, head and shoulders, wearing glasses, typed out line by line in a terminal window while a green scan line sweeps over it.</desc>
 <style>
 text { font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace; }
 .a { fill: #c9d1d9; font-size: 6.79px; white-space: pre; animation: wipe 0.3s linear both; }
+.beam { opacity: 0; }
+.b1 { animation: scan 1.88s linear 0.2s 1 both; }
+.b2 { animation: sweep 6s ease-in-out 3.58s infinite both; }
 @keyframes wipe { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+@keyframes scan {
+  0% { opacity: 1; transform: translateY(0); }
+  92% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(390px); }
+}
+@keyframes sweep {
+  0% { opacity: 0; transform: translateY(0); }
+  8% { opacity: 0.75; }
+  42% { opacity: 0.75; }
+  50% { opacity: 0; transform: translateY(390px); }
+  100% { opacity: 0; transform: translateY(390px); }
+}
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
 </style>
+<defs>
+<linearGradient id="glow" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0" stop-color="#3fb950" stop-opacity="0"/>
+<stop offset="1" stop-color="#3fb950" stop-opacity="0.28"/>
+</linearGradient>
+<clipPath id="screen"><rect x="1" y="29" width="368" height="390"/></clipPath>
+</defs>
 <rect x="0.5" y="0.5" width="369" height="419" rx="8" fill="#0d1117" stroke="#30363d"/>
 <path d="M1 28.5 H369" stroke="#30363d"/>
 <circle cx="16" cy="14.5" r="4.5" fill="#484f58"/>
@@ -56,4 +78,12 @@ text { font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'L
 <text x="14" y="378.3" class="a" textLength="342.0" lengthAdjust="spacingAndGlyphs" xml:space="preserve" style="animation-delay:1.670s">                            :*+*.                                                  `</text>
 <text x="14" y="385.9" class="a" textLength="126.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" style="animation-delay:1.705s">                .            =+</text>
 <text x="14" y="393.5" class="a" textLength="69.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve" style="animation-delay:1.740s">                .</text>
+<g clip-path="url(#screen)"><g class="beam b1">
+<rect x="1" y="-7" width="368" height="36" fill="url(#glow)"/>
+<rect x="1" y="28" width="368" height="1.2" fill="#56d364" opacity="0.9"/>
+</g></g>
+<g clip-path="url(#screen)"><g class="beam b2">
+<rect x="1" y="-7" width="368" height="36" fill="url(#glow)"/>
+<rect x="1" y="28" width="368" height="1.2" fill="#56d364" opacity="0.9"/>
+</g></g>
 </svg>
