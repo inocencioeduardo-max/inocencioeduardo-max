@@ -62,6 +62,7 @@ chrome --headless=new --hide-scrollbars --window-size=500,500 --screenshot=avata
 `scripts/build-contributions.mjs` reads GitHub's public calendar at `https://github.com/users/<username>/contributions`, validates it and renders the SVG.
 
 - **Never fabricated.** If the fetch fails, or the markup changes and validation fails (wrong day count, date gaps, missing counts, level/count disagreement), the script writes nothing. The last valid SVG and snapshot stay in place, and it logs a `::warning::`.
+- `contributions.months` in `profile.config.json` sets the window: `6` shows the last 6 months with bigger squares, and `12` shows the full year. The snapshot always keeps the full year, so switching only needs `npm run build:offline`.
 - `npm run build:offline` re-renders from `data/contributions.json` without the network. Use it after changing styles.
 - The footer shows current/longest streak, best day and active days, all computed from the same daily counts. With no public activity it says so instead of showing zeros. It only shows **public** activity. To include private-repo activity as anonymous counts, turn on *Settings → Public profile → Contributions & activity → "Include private contributions on my profile"*. The next refresh picks it up.
 

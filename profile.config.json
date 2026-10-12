@@ -4,12 +4,49 @@
   "card": {
     "title": "Ino Builds AI.",
     "rows": [
-      { "key": "Role", "lines": ["AI Automation Engineer", "Telecom Platform Lead", "Systems Builder"] },
-      { "key": "Focus", "lines": ["AI tools, automation systems and", "workflows that connect software", "with real devices"] },
-      { "key": "Domains", "lines": ["Telecom & cloud platforms", "Wi-Fi · DOCSIS · IPv6", "Device interoperability"] },
-      { "key": "Building", "lines": ["AI-EOS / ChatMap   [in development]", "DiamondScout       [in development]"] },
-      { "key": "Testing", "lines": ["Telecom test automation  [ongoing]"] },
-      { "key": "Base", "lines": ["Netherlands · Dominican roots"] }
+      {
+        "key": "Role",
+        "lines": [
+          "AI Automation Engineer",
+          "Telecom Platform Lead",
+          "Systems Builder"
+        ]
+      },
+      {
+        "key": "Focus",
+        "lines": [
+          "AI tools, automation systems and",
+          "workflows that connect software",
+          "with real devices"
+        ]
+      },
+      {
+        "key": "Domains",
+        "lines": [
+          "Telecom & cloud platforms",
+          "Wi-Fi · DOCSIS · IPv6",
+          "Device interoperability"
+        ]
+      },
+      {
+        "key": "Building",
+        "lines": [
+          "AI-EOS / ChatMap   [in development]",
+          "DiamondScout       [in development]"
+        ]
+      },
+      {
+        "key": "Testing",
+        "lines": [
+          "Telecom test automation  [ongoing]"
+        ]
+      },
+      {
+        "key": "Base",
+        "lines": [
+          "Netherlands · Dominican roots"
+        ]
+      }
     ]
   },
   "portrait": {
@@ -17,6 +54,7 @@
     "source": "data/portrait.txt"
   },
   "contributions": {
-    "title": "public contributions"
+    "title": "public contributions",
+    "months": 6
   }
 }

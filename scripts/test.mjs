@@ -108,3 +108,15 @@ test('decodes PNGs and maps brightness to the glyph ramp', async () => {
   assert.equal(lines[5][5], RAMP.at(-1)); // bright subject → densest glyph
   assert.throws(() => decodePng(Buffer.from('not a png')), /not a PNG/);
 });
+
+test('limits the heatmap to the configured trailing months', async () => {
+  const { lastMonths, render } = await import('./build-contributions.mjs');
+  const { days } = parseCalendar(fixture(year((i) => (i === 365 ? 3 : i === 10 ? 2 : 0))));
+  const six = lastMonths(days, 6);
+  assert.equal(six.at(-1).date, days.at(-1).date);
+  assert.ok(six.length >= 181 && six.length <= 184, `got ${six.length} days`);
+  assert.equal(lastMonths(days, 12), days);
+  const svg = render({ username: 'octo', title: 'public contributions', days, months: 6 });
+  assert.deepEqual(checkXml(svg), []);
+  assert.match(svg, /3 contributions in the last 6 months/); // the early 2-count day is outside the window
+});

@@ -120,15 +120,27 @@ export function stats(days) {
   return { active: days.filter((d) => d.count > 0).length, longest, current, best };
 }
 
-export function render({ username, title, total, days }) {
+// Keeps the trailing `months` calendar months of days (12 = the full year GitHub returns).
+export function lastMonths(days, months) {
+  if (!months || months >= 12) return days;
+  const end = new Date(`${days[days.length - 1].date}T00:00:00Z`);
+  const start = new Date(Date.UTC(end.getUTCFullYear(), end.getUTCMonth() - months, end.getUTCDate() + 1));
+  const from = start.toISOString().slice(0, 10);
+  return days.filter((d) => d.date >= from);
+}
+
+export function render({ username, title, days: allDays, months = 12 }) {
+  const days = lastMonths(allDays, months);
+  const total = days.reduce((sum, d) => sum + d.count, 0);
   const W = HEATMAP_W;
-  const cell = 12;
-  const left = 46;
   const top = 78;
   const first = new Date(`${days[0].date}T00:00:00Z`);
   const offset = first.getUTCDay(); // Sunday-first rows, matching GitHub
   const weeks = Math.ceil((days.length + offset) / 7);
-  const step = Math.min(15, Math.floor((W - left - PAD) / weeks));
+  // Fewer weeks → bigger squares, capped so a short window doesn't get oversized.
+  const step = Math.min(24, Math.floor((W - 46 - PAD * 2) / weeks));
+  const cell = step - 3;
+  const left = Math.round((W - (weeks * step - 3)) / 2 + 12); // centred, leaving room for day labels
   const H = top + 7 * step + 46;
   const fromDate = days[0].date;
   const toDate = days[days.length - 1].date;
@@ -145,7 +157,7 @@ export function render({ username, title, total, days }) {
     const y = top + r * step;
     const label = `${d.count === 0 ? 'No' : d.count} contribution${d.count === 1 ? '' : 's'} on ${d.date}`;
     cells.push(
-      `<rect x="${x}" y="${y}" width="${cell}" height="${cell}" rx="2.5" class="c d${w + r}" fill="${t.levels[d.level]}"><title>${label}</title></rect>`,
+      `<rect x="${x}" y="${y}" width="${cell}" height="${cell}" rx="${(cell / 5).toFixed(1)}" class="c d${w + r}" fill="${t.levels[d.level]}"><title>${label}</title></rect>`,
     );
     const month = new Date(`${d.date}T00:00:00Z`).getUTCMonth();
     if (month !== lastMonth && r <= 3 && w < weeks - 1) {
@@ -159,20 +171,22 @@ export function render({ username, title, total, days }) {
     [3, 'Wed'],
     [5, 'Fri'],
   ]
-    .map(([r, l]) => `<text x="${left - 8}" y="${top + r * step + 10}" text-anchor="end" class="lbl">${l}</text>`)
+    .map(([r, l]) => `<text x="${left - 8}" y="${top + r * step + cell / 2 + 3.5}" text-anchor="end" class="lbl">${l}</text>`)
     .join('');
 
   const footY = H - 18;
-  const legendX = W - PAD - 5 * step - 70;
+  const legendStep = 15;
+  const legendX = W - PAD - 5 * legendStep - 70;
   const legend = t.levels
-    .map((c, i) => `<rect x="${legendX + 34 + i * step}" y="${footY - 10}" width="${cell}" height="${cell}" rx="2.5" fill="${c}"/>`)
+    .map((c, i) => `<rect x="${legendX + 34 + i * legendStep}" y="${footY - 10}" width="12" height="12" rx="2.5" fill="${c}"/>`)
     .join('');
+  const period = months >= 12 ? 'the last year' : `the last ${months} months`;
 
   const plural = (n, word) => `${n.toLocaleString('en-US')} ${word}${n === 1 ? '' : 's'}`;
   const summary =
     total === 0
       ? 'No public contributions in this period yet — refreshed daily.'
-      : `${plural(total, 'contribution')} in the last year`;
+      : `${plural(total, 'contribution')} in ${period}`;
   const footer =
     total === 0
       ? `${fromDate} → ${toDate} · public GitHub data`
@@ -202,7 +216,7 @@ ${monthLabels.join('')}
 ${dayLabels}
 ${cells.join('\n')}
 <text x="${PAD + 6}" y="${footY}" class="foot">${esc(footer)}</text>
-<text x="${legendX}" y="${footY}" class="lbl">Less</text>${legend}<text x="${legendX + 34 + 5 * step + 4}" y="${footY}" class="lbl">More</text>`;
+<text x="${legendX}" y="${footY}" class="lbl">Less</text>${legend}<text x="${legendX + 34 + 5 * legendStep + 4}" y="${footY}" class="lbl">More</text>`;
 
   return svgDoc({
     width: W,
@@ -239,7 +253,7 @@ async function main() {
     return;
   }
 
-  const svg = render({ username, title: config.contributions.title, total: snapshot.total, days: snapshot.days });
+  const svg = render({ username, title: config.contributions.title, days: snapshot.days, months: config.contributions.months });
   const dataChanged = writeIfChanged(SNAPSHOT, `${JSON.stringify(snapshot, null, 1)}\n`);
   const svgChanged = writeIfChanged(OUTPUT, svg);
   console.log(`${dataChanged ? 'updated  ' : 'unchanged'} ${SNAPSHOT}`);
