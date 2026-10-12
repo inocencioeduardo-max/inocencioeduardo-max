@@ -7,7 +7,7 @@
 <table>
   <tr>
     <td valign="top"><img src="assets/portrait.svg" width="330" alt="Monochrome ASCII-art portrait of Ino, head and shoulders, wearing glasses."></td>
-    <td valign="top"><img src="assets/card.svg" width="437" alt="Terminal info card titled Ino Builds AI. Role: AI Automation Engineer, Telecom Platform Lead, Systems Builder. Focus: AI tools, automation systems and workflows that connect software with real devices. Domains: telecom and cloud platforms, Wi-Fi, DOCSIS, IPv6, device interoperability. Building: AI-EOS / ChatMap and DiamondScout, both in development. Testing: telecom test automation, ongoing. Base: Netherlands, Dominican roots."></td>
+    <td valign="top"><img src="assets/card.svg" width="437" alt="Terminal info card titled Ino Builds AI. Role: AI Automation Engineer, Telecom Platform Lead, Systems Builder. Focus: AI tools, automation systems and workflows that connect software with real devices. Domains: telecom and cloud platforms, Wi-Fi, DOCSIS, IPv6, device interoperability. Building: AI-EOS / ChatMap and DiamondScout, both in development. Testing: telecom test automation, ongoing. Base: Netherlands."></td>
   </tr>
 </table>
 
@@ -19,7 +19,7 @@
 
 I build AI tools, automation systems, and workflows that connect software with real devices.
 My background is in telecom and cloud platforms: Wi-Fi, DOCSIS, IPv6, device interoperability and test automation.
-I'm based in the Netherlands, with Dominican roots.
+I'm based in the Netherlands.
 
 ## Current projects
 
