@@ -26,7 +26,7 @@ for (const file of svgs) {
   if (!/^<svg [^>]*xmlns="http:\/\/www\.w3\.org\/2000\/svg"/.test(src)) report(rel, 'missing svg namespace');
   if (!/viewBox="/.test(src)) report(rel, 'missing viewBox');
   if (!/role="img"/.test(src) || !/<title[^>]*>[^<]+<\/title>/.test(src)) report(rel, 'missing role="img" or <title>');
-  if (!/prefers-reduced-motion/.test(src)) report(rel, 'missing reduced-motion fallback');
+  if (/@keyframes/.test(src) && !/prefers-reduced-motion/.test(src)) report(rel, 'missing reduced-motion fallback');
   const kb = statSync(join(ROOT, rel)).size / 1024;
   if (kb > 150) report(rel, `too large (${kb.toFixed(0)} KB)`);
 }

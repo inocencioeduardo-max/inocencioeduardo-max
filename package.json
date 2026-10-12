@@ -15,6 +15,7 @@
     "validate": "node scripts/validate.mjs",
     "validate:links": "node scripts/validate.mjs --links",
     "preview": "node scripts/preview.mjs",
-    "build:portrait": "node scripts/build-portrait.mjs"
+    "build:portrait": "node scripts/build-portrait.mjs",
+    "build:avatar": "node scripts/build-avatar.mjs"
   }
 }

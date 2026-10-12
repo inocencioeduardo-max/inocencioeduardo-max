@@ -49,6 +49,14 @@ These were the settings for the current portrait (a 150×150 source). A larger, 
 
 JPEG/HEIC must be converted to PNG first.
 
+### Profile picture
+
+`npm run build:avatar` writes `assets/avatar.svg`, a square, static head-and-shoulders crop of the same portrait. GitHub only accepts PNG/JPG/GIF profile pictures, so render it with Chrome and upload the PNG at github.com/settings/profile:
+
+```sh
+chrome --headless=new --hide-scrollbars --window-size=500,500 --screenshot=avatar.png assets/avatar.svg
+```
+
 ## Contribution graph
 
 `scripts/build-contributions.mjs` reads GitHub's public calendar at `https://github.com/users/<username>/contributions`, validates it and renders the SVG.
